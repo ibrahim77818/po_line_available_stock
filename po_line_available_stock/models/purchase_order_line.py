@@ -10,14 +10,14 @@ class PurchaseOrderLine(models.Model):
     pls_qty_on_hand = fields.Float(
         string="On Hand",
         compute="_compute_pls_stock",
-        digits="Product Unit of Measure",
+        digits="Product Unit",
         help="Quantity on hand in the configured inventory scope, "
              "expressed in this line's unit of measure.",
     )
     pls_qty_forecasted = fields.Float(
         string="Forecasted",
         compute="_compute_pls_stock",
-        digits="Product Unit of Measure",
+        digits="Product Unit",
         help="Forecasted quantity (on hand + incoming - outgoing) in the "
              "configured inventory scope, expressed in this line's unit "
              "of measure.",
@@ -52,7 +52,7 @@ class PurchaseOrderLine(models.Model):
     # ------------------------------------------------------------------
     @api.depends(
         "product_id",
-        "product_uom",
+        "product_uom_id",
         "order_id.picking_type_id",
         "order_id.company_id",
         "order_id.company_id.po_stock_visibility",
@@ -75,7 +75,9 @@ class PurchaseOrderLine(models.Model):
             line.pls_qty_on_hand = 0.0
             line.pls_qty_forecasted = 0.0
             product = line.product_id
-            line.pls_is_storable = bool(product) and product.type == "product"
+            # v18: the "Storable Product" type is gone; storable goods are
+            # type "consu" with is_storable ("Track Inventory") ticked.
+            line.pls_is_storable = bool(product) and product.is_storable
             company = line.order_id.company_id or line.company_id or self.env.company
             if not company.po_stock_visibility or not line.pls_is_storable:
                 continue
@@ -88,7 +90,8 @@ class PurchaseOrderLine(models.Model):
             products = lines.product_id._origin
             stock = (
                 products.with_company(company_id)
-                .with_context(warehouse=list(wh_ids), location=False)
+                # v18 reads ``warehouse_id`` (``warehouse`` is silently ignored)
+                .with_context(warehouse_id=list(wh_ids), location=False)
                 ._compute_quantities_dict(None, None, None)
             )
             for line in lines:
@@ -98,7 +101,7 @@ class PurchaseOrderLine(models.Model):
                 on_hand = values["qty_available"]
                 forecast = values["virtual_available"]
                 product_uom = line.product_id.uom_id
-                line_uom = line.product_uom
+                line_uom = line.product_uom_id  # v19: renamed from product_uom
                 if line_uom and line_uom != product_uom:
                     on_hand = product_uom._compute_quantity(
                         on_hand, line_uom, round=False,

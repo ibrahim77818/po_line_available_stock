@@ -43,8 +43,8 @@ class TestPoLineAvailableStock(TransactionCase):
     @classmethod
     def _make_product(cls, name):
         return cls.env["product.product"].create({
-            "name": name, "type": "product",
-            "uom_id": cls.uom_unit.id, "uom_po_id": cls.uom_unit.id,
+            "name": name, "type": "consu", "is_storable": True,
+            "uom_id": cls.uom_unit.id,  # v19: uom_po_id removed
         })
 
     @classmethod
@@ -69,7 +69,7 @@ class TestPoLineAvailableStock(TransactionCase):
             "order_line": [(0, 0, {
                 "product_id": product.id,
                 "product_qty": qty,
-                "product_uom": (uom or product.uom_po_id).id,
+                "product_uom_id": (uom or product.uom_id).id,
                 "price_unit": 1.0,
             }) for product, qty, uom in lines],
         })
@@ -77,7 +77,6 @@ class TestPoLineAvailableStock(TransactionCase):
     def _ship_out(self, product, warehouse, qty):
         """Confirmed outgoing move: lowers the forecast, not the on hand."""
         move = self.env["stock.move"].create({
-            "name": "PLS out",
             "product_id": product.id,
             "product_uom": product.uom_id.id,
             "product_uom_qty": qty,
@@ -167,6 +166,9 @@ class TestPoLineAvailableStock(TransactionCase):
             "name": "PLS Dropship", "code": "incoming",
             "sequence_code": "PLSDS", "warehouse_id": False,
             "company_id": self.company.id,
+            # v18: both default locations are required; without a warehouse
+            # they can't be computed, so set them as a real dropship type does
+            "default_location_src_id": self.env.ref("stock.stock_location_suppliers").id,
             "default_location_dest_id": self.customer_loc.id,
         })
         po = self._make_po(self.wh1, [(self.product, 1, None)],
@@ -211,6 +213,8 @@ class TestPoLineAvailableStock(TransactionCase):
     # UI / onchange
     # ------------------------------------------------------------------
     def test_11_form_recomputes_on_warehouse_change(self):
+        # v19: the line unit is only in the view for "Units of Measure" users
+        self.env.user.group_ids += self.env.ref("uom.group_uom")
         form = Form(self.env["purchase.order"])
         form.partner_id = self.vendor
         form.picking_type_id = self.wh1.in_type_id
@@ -220,7 +224,7 @@ class TestPoLineAvailableStock(TransactionCase):
         form.picking_type_id = self.wh2.in_type_id
         with form.order_line.edit(0) as line:
             self.assertEqual(line.pls_qty_on_hand, 25)
-            line.product_uom = self.uom_dozen
+            line.product_uom_id = self.uom_dozen
             # form values are rounded to the field's digits
             self.assertAlmostEqual(line.pls_qty_on_hand, 25 / 12, places=2)
             line.product_id = self.consumable
@@ -240,7 +244,7 @@ class TestPoLineAvailableStock(TransactionCase):
     def test_13_purchase_user_without_inventory_rights(self):
         buyer = self.env["res.users"].create({
             "name": "PLS Buyer", "login": "pls_buyer",
-            "groups_id": [(6, 0, [self.env.ref("base.group_user").id,
+            "group_ids": [(6, 0, [self.env.ref("base.group_user").id,
                                   self.env.ref("purchase.group_purchase_user").id])],
         })
         self.assertFalse(buyer.has_group("stock.group_stock_user"))
