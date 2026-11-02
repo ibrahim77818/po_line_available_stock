@@ -1,11 +1,10 @@
-#
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # 	* po_line_available_stock
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: Ibrahim Yahia\n"
 "Language-Team: Arabic\n"
@@ -14,17 +13,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
-
-#. module: po_line_available_stock
-#: model_terms:ir.ui.view,arch_db:po_line_available_stock.res_config_settings_view_form_po_line_stock
-msgid ""
-"<span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-"
-"specific.\" role=\"img\" aria-label=\"Values set here are company-"
-"specific.\" groups=\"base.group_multi_company\"/>"
-msgstr ""
-"<span class=\"fa fa-lg fa-building-o\" title=\"القيم المحددة هنا خاصة "
-"بالشركة.\" role=\"img\" aria-label=\"القيم المحددة هنا خاصة بالشركة.\" "
-"groups=\"base.group_multi_company\"/>"
 
 #. module: po_line_available_stock
 #: model:ir.model.fields.selection,name:po_line_available_stock.selection__res_company__po_stock_scope__company

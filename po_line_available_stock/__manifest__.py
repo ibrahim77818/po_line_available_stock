@@ -14,7 +14,7 @@ Display live stock levels on purchase order lines.
   warehouses, not with the number of lines
 * Arabic (ar_001) translation, RTL-ready
 """,
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "category": "Inventory/Purchase",
     "author": "Ibrahim Yahia",
     "website": "https://www.linkedin.com/in/ibrahim-yahia",
