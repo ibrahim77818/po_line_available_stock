@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_po_line_stock" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.po_line_available_stock</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="purchase.res_config_settings_view_form_purchase"/>
+        <field name="arch" type="xml">
+            <div id="auto_receipt_reminder" position="after">
+                <div class="col-12 col-lg-6 o_setting_box" id="po_line_available_stock">
+                    <div class="o_setting_left_pane">
+                        <field name="po_stock_visibility"/>
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="po_stock_visibility"/>
+                        <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." role="img" aria-label="Values set here are company-specific." groups="base.group_multi_company"/>
+                        <div class="text-muted">
+                            Show stock levels on purchase order lines
+                        </div>
+                        <div class="content-group" attrs="{'invisible': [('po_stock_visibility', '=', False)]}">
+                            <div class="row mt16">
+                                <label for="po_stock_metric" class="col-lg-4 o_light_label"/>
+                                <field name="po_stock_metric" class="col-lg-8" widget="radio"
+                                       attrs="{'required': [('po_stock_visibility', '=', True)]}"/>
+                            </div>
+                            <div class="row mt8">
+                                <label for="po_stock_scope" class="col-lg-4 o_light_label"/>
+                                <field name="po_stock_scope" class="col-lg-8" widget="radio"
+                                       attrs="{'required': [('po_stock_visibility', '=', True)]}"/>
+                            </div>
+                            <div class="text-muted small mt8">
+                                Orders without a receiving warehouse (e.g. dropship) always use all company warehouses.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,188 @@
+<!-- Odoo Apps description page for po_line_available_stock (Odoo 16.0). Inline styles only: apps.odoo.com strips <style> and <script> blocks. -->
+<section style="max-width:1120px;margin:0 auto;padding:0 16px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;color:#2b2b33;">
+
+<!-- ============================== HERO ============================== -->
+<div style="background:linear-gradient(120deg,#017E84 0%,#3d6b78 45%,#714B67 100%);border-radius:18px;padding:48px 40px 40px;color:#ffffff;margin-top:12px;">
+  <div style="font-size:13px;letter-spacing:2px;text-transform:uppercase;opacity:.85;margin-bottom:10px;">Purchase &middot; Inventory &middot; Multi-warehouse</div>
+  <h1 style="font-size:40px;line-height:1.15;font-weight:700;margin:0 0 14px;color:#ffffff;">Stock on PO Lines</h1>
+  <p style="font-size:19px;line-height:1.55;max-width:760px;margin:0 0 24px;color:#ffffff;opacity:.95;">See <b>On Hand</b> and <b>Forecasted</b> stock right next to the quantity on every purchase order line, for the receiving warehouse or for the whole company. Buyers order what is actually missing, without leaving the RFQ.</p>
+  <div>
+    <span style="display:inline-block;border:1px solid rgba(255,255,255,.7);border-radius:20px;padding:6px 14px;margin:0 8px 8px 0;font-size:14px;">Odoo 16.0</span>
+    <span style="display:inline-block;border:1px solid rgba(255,255,255,.7);border-radius:20px;padding:6px 14px;margin:0 8px 8px 0;font-size:14px;">Community &amp; Enterprise</span>
+    <span style="display:inline-block;border:1px solid rgba(255,255,255,.7);border-radius:20px;padding:6px 14px;margin:0 8px 8px 0;font-size:14px;">15 automated tests</span>
+    <span style="display:inline-block;border:1px solid rgba(255,255,255,.7);border-radius:20px;padding:6px 14px;margin:0 8px 8px 0;font-size:14px;">Arabic &middot; RTL</span>
+    <span style="display:inline-block;border:1px solid rgba(255,255,255,.7);border-radius:20px;padding:6px 14px;margin:0 8px 8px 0;font-size:14px;">Technical name: po_line_available_stock</span>
+    <span style="display:inline-block;border:1px solid rgba(255,255,255,.7);border-radius:20px;padding:6px 14px;margin:0 8px 8px 0;font-size:14px;">LGPL-3</span>
+  </div>
+</div>
+
+<!-- ============================== KEY NUMBERS ============================== -->
+<div style="display:flex;flex-wrap:wrap;margin:28px -8px 8px;">
+  <div style="flex:1 1 220px;margin:8px;background:#f6f4f6;border-radius:14px;padding:20px 22px;"><div style="font-size:30px;font-weight:700;color:#714B67;">2 metrics</div><div style="font-size:15px;color:#555;">On Hand, Forecasted, or both side by side</div></div>
+  <div style="flex:1 1 220px;margin:8px;background:#eef6f6;border-radius:14px;padding:20px 22px;"><div style="font-size:30px;font-weight:700;color:#017E84;">2 scopes</div><div style="font-size:15px;color:#555;">Receiving warehouse only, or all company warehouses</div></div>
+  <div style="flex:1 1 220px;margin:8px;background:#f6f4f6;border-radius:14px;padding:20px 22px;"><div style="font-size:30px;font-weight:700;color:#714B67;">0 extra queries</div><div style="font-size:15px;color:#555;">per line: 3 lines or 40 lines cost the same</div></div>
+  <div style="flex:1 1 220px;margin:8px;background:#eef6f6;border-radius:14px;padding:20px 22px;"><div style="font-size:30px;font-weight:700;color:#017E84;">Live</div><div style="font-size:15px;color:#555;">Recalculated as you change warehouse, product or UoM</div></div>
+</div>
+
+<!-- ============================== WHY ============================== -->
+<h2 style="font-size:28px;font-weight:700;margin:40px 0 6px;color:#2b2b33;">Why this module</h2>
+<p style="font-size:16px;color:#555;margin:0 0 18px;">A buyer preparing an RFQ needs one answer per line: how much do we already have, and how much will we have?</p>
+<div style="display:flex;flex-wrap:wrap;margin:0 -10px;">
+  <div style="flex:1 1 440px;margin:10px;border:1px solid #f1d6d6;background:#fff8f8;border-radius:14px;padding:24px 26px;">
+    <h3 style="font-size:19px;font-weight:700;color:#b33939;margin:0 0 12px;">In standard Odoo 16</h3>
+    <ul style="font-size:15px;line-height:1.65;margin:0;padding-left:20px;color:#3a3a42;">
+      <li>PO lines show <b>no stock figures</b>; you open the forecast report <b>one product at a time</b>.</li>
+      <li>Product stock is shown <b>for the whole company</b> unless you filter by warehouse yourself.</li>
+      <li>Open customer deliveries are <b>not visible</b> while you type the order quantity.</li>
+      <li>Stock is expressed in the product&rsquo;s <b>stock unit</b>, not the unit you buy in.</li>
+      <li>Switching <b>Deliver To</b> gives no hint of the stock at the new warehouse.</li>
+      <li>Nothing flags a line whose forecast is <b>already negative</b>.</li>
+    </ul>
+  </div>
+  <div style="flex:1 1 440px;margin:10px;border:1px solid #cfe7e7;background:#f4fbfb;border-radius:14px;padding:24px 26px;">
+    <h3 style="font-size:19px;font-weight:700;color:#017E84;margin:0 0 12px;">With this module</h3>
+    <ul style="font-size:15px;line-height:1.65;margin:0;padding-left:20px;color:#3a3a42;">
+      <li><b>On Hand</b> and <b>Forecasted</b> columns on every line, for all products at once.</li>
+      <li>Scope set once: <b>PO Warehouse Only</b> or <b>All Company Warehouses</b>.</li>
+      <li><b>Forecasted</b> = on hand + incoming &minus; outgoing, so open deliveries count.</li>
+      <li>Converted to the <b>line&rsquo;s unit of measure</b>: buy in Dozens, read stock in Dozens.</li>
+      <li>Change <b>Deliver To</b> and every line <b>recalculates instantly</b>.</li>
+      <li>Negative values in <b>red</b>; forecast below the ordered quantity in <b>amber</b>.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================== HOW IT WORKS ============================== -->
+<h2 style="font-size:28px;font-weight:700;margin:40px 0 6px;color:#2b2b33;">How it works</h2>
+<p style="font-size:16px;color:#555;margin:0 0 18px;">Four steps, no new menus to learn.</p>
+<div style="display:flex;flex-wrap:wrap;margin:0 -8px;">
+  <div style="flex:1 1 200px;margin:8px;border-radius:12px;border:1px solid #e3dde2;padding:18px;"><div style="width:34px;height:34px;border-radius:50%;background:#714B67;color:#fff;font-weight:700;text-align:center;line-height:34px;margin-bottom:10px;">1</div><div style="font-weight:700;margin-bottom:4px;">Enable</div><div style="font-size:14px;color:#555;">Tick <b>Stock on PO Lines</b> in Purchase settings.</div></div>
+  <div style="flex:1 1 200px;margin:8px;border-radius:12px;border:1px solid #e3dde2;padding:18px;"><div style="width:34px;height:34px;border-radius:50%;background:#714B67;color:#fff;font-weight:700;text-align:center;line-height:34px;margin-bottom:10px;">2</div><div style="font-weight:700;margin-bottom:4px;">Choose</div><div style="font-size:14px;color:#555;">Pick the <b>Stock Metric</b> and the <b>Inventory Scope</b> for this company.</div></div>
+  <div style="flex:1 1 200px;margin:8px;border-radius:12px;border:1px solid #e3dde2;padding:18px;"><div style="width:34px;height:34px;border-radius:50%;background:#714B67;color:#fff;font-weight:700;text-align:center;line-height:34px;margin-bottom:10px;">3</div><div style="font-weight:700;margin-bottom:4px;">Order</div><div style="font-size:14px;color:#555;">Create an RFQ as usual; the stock columns appear next to <b>Quantity</b>.</div></div>
+  <div style="flex:1 1 200px;margin:8px;border-radius:12px;border:1px solid #cfe7e7;background:#f4fbfb;padding:18px;"><div style="width:34px;height:34px;border-radius:50%;background:#017E84;color:#fff;font-weight:700;text-align:center;line-height:34px;margin-bottom:10px;">4</div><div style="font-weight:700;margin-bottom:4px;">Decide</div><div style="font-size:14px;color:#555;">Red and amber lines show where you are short; adjust quantities before confirming.</div></div>
+</div>
+
+<!-- ============================== FEATURES ============================== -->
+<h2 style="font-size:28px;font-weight:700;margin:48px 0 6px;color:#2b2b33;">Features</h2>
+<p style="font-size:16px;color:#555;margin:0 0 6px;">Screenshots use demo data for <b>Gulf Supplies Co.</b>: three warehouses (<b>Jeddah</b>, <b>Riyadh</b>, <b>Dammam</b>), stock in each, open customer deliveries from Jeddah and Riyadh, and two draft RFQs.</p>
+
+<div style="margin:44px 0 0;">
+  <div style="font-size:13px;font-weight:700;color:#017E84;letter-spacing:1px;text-transform:uppercase;">Settings</div>
+  <h3 style="font-size:23px;font-weight:700;margin:4px 0 8px;">One switch, two choices, per company</h3>
+  <p style="font-size:15px;line-height:1.6;color:#555;margin:0 0 14px;">Go to <b>Purchase &rsaquo; Configuration &rsaquo; Settings &rsaquo; Orders</b> and tick <b>Stock on PO Lines</b>. Then pick the <b>Stock Metric</b> (<b>Quantity On Hand</b>, <b>Forecasted Quantity</b> or <b>Both</b>) and the <b>Inventory Scope</b> (<b>PO Warehouse Only</b> or <b>All Company Warehouses</b>). Values are stored on the company, so each company of a multi-company database can be set differently.</p>
+  <img src="pls_01_settings.png" alt="Purchase settings with Stock on PO Lines, Stock Metric and Inventory Scope" style="width:100%;border:1px solid #e1e1e6;border-radius:10px;box-shadow:0 6px 24px rgba(30,30,60,.10);"/>
+</div>
+
+<div style="margin:44px 0 0;">
+  <div style="font-size:13px;font-weight:700;color:#017E84;letter-spacing:1px;text-transform:uppercase;">Feature 1</div>
+  <h3 style="font-size:23px;font-weight:700;margin:4px 0 8px;">Stock right next to the quantity you order</h3>
+  <p style="font-size:15px;line-height:1.6;color:#555;margin:0 0 14px;">The <b>On Hand</b> and <b>Forecasted</b> columns sit right after <b>Quantity</b>. Here P00001 is delivered to the <b>Jeddah Warehouse</b>: the Copper Cable has 6 on hand but 10 already promised to customers, so the forecast is <b>&minus;4.00</b> in red. The Safety Helmet forecast (18) is below the 50 ordered, so it shows in amber. Work Gloves are bought in <b>Dozens</b>, and the 600 units in stock read as <b>50.00</b>. The service line stays blank.</p>
+  <img src="pls_02_po_warehouse.png" alt="Purchase order lines with On Hand and Forecasted columns for the Jeddah Warehouse" style="width:100%;border:1px solid #e1e1e6;border-radius:10px;box-shadow:0 6px 24px rgba(30,30,60,.10);"/>
+</div>
+
+<div style="margin:44px 0 0;">
+  <div style="font-size:13px;font-weight:700;color:#017E84;letter-spacing:1px;text-transform:uppercase;">Feature 2</div>
+  <h3 style="font-size:23px;font-weight:700;margin:4px 0 8px;">Change the warehouse, see the new numbers instantly</h3>
+  <p style="font-size:15px;line-height:1.6;color:#555;margin:0 0 14px;">Switch <b>Deliver To</b> from Jeddah to <b>Riyadh Warehouse: Receipts</b> and every line recalculates before you save. The same RFQ now tells a different story: plenty of Copper Cable (35) and helmets, but LED Panels drop to a forecast of 3 and Hydraulic Oil to 0. Changing a line&rsquo;s product or unit of measure updates it the same way.</p>
+  <img src="pls_03_po_switch_warehouse.png" alt="Same purchase order after switching Deliver To to the Riyadh Warehouse" style="width:100%;border:1px solid #e1e1e6;border-radius:10px;box-shadow:0 6px 24px rgba(30,30,60,.10);"/>
+</div>
+
+<div style="margin:44px 0 0;">
+  <div style="font-size:13px;font-weight:700;color:#017E84;letter-spacing:1px;text-transform:uppercase;">Feature 3</div>
+  <h3 style="font-size:23px;font-weight:700;margin:4px 0 8px;">Company-wide view when you transfer between warehouses</h3>
+  <p style="font-size:15px;line-height:1.6;color:#555;margin:0 0 14px;">With <b>All Company Warehouses</b>, the columns add up every warehouse of the order&rsquo;s company. Useful when stock is rebalanced by internal transfers rather than bought per site.</p>
+  <img src="pls_04_company_scope.png" alt="Purchase order lines with company-wide On Hand and Forecasted totals" style="width:100%;border:1px solid #e1e1e6;border-radius:10px;box-shadow:0 6px 24px rgba(30,30,60,.10);margin-bottom:22px;"/>
+  <div style="overflow-x:auto;">
+  <table style="width:100%;border-collapse:collapse;font-size:15px;">
+    <thead><tr style="background:#714B67;color:#fff;"><th style="text-align:left;padding:10px 10px;">On hand</th><th style="text-align:right;padding:10px 10px;">Jeddah</th><th style="text-align:right;padding:10px 10px;">Riyadh</th><th style="text-align:right;padding:10px 10px;">Dammam</th><th style="text-align:right;padding:10px 10px;">Company-wide</th></tr></thead>
+    <tbody>
+      <tr style="border-bottom:1px solid #eee;"><td style="padding:10px 10px;">Safety Helmet</td><td style="padding:10px 10px;text-align:right;">48</td><td style="padding:10px 10px;text-align:right;">210</td><td style="padding:10px 10px;text-align:right;">60</td><td style="padding:10px 10px;text-align:right;"><b>318</b></td></tr>
+      <tr style="border-bottom:1px solid #eee;background:#fafafa;"><td style="padding:10px 10px;">Copper Cable 2.5mm (100m)</td><td style="padding:10px 10px;text-align:right;">6</td><td style="padding:10px 10px;text-align:right;">35</td><td style="padding:10px 10px;text-align:right;">12</td><td style="padding:10px 10px;text-align:right;"><b>53</b></td></tr>
+      <tr style="border-bottom:1px solid #eee;"><td style="padding:10px 10px;">LED Panel 60&times;60</td><td style="padding:10px 10px;text-align:right;">120</td><td style="padding:10px 10px;text-align:right;">18</td><td style="padding:10px 10px;text-align:right;">40</td><td style="padding:10px 10px;text-align:right;"><b>178</b></td></tr>
+      <tr style="border-bottom:1px solid #eee;background:#fafafa;"><td style="padding:10px 10px;">Hydraulic Oil 20L</td><td style="padding:10px 10px;text-align:right;">14</td><td style="padding:10px 10px;text-align:right;">0</td><td style="padding:10px 10px;text-align:right;">25</td><td style="padding:10px 10px;text-align:right;"><b>39</b></td></tr>
+      <tr style="border-bottom:1px solid #eee;"><td style="padding:10px 10px;">Work Gloves (in Dozens)</td><td style="padding:10px 10px;text-align:right;">50</td><td style="padding:10px 10px;text-align:right;">12.5</td><td style="padding:10px 10px;text-align:right;">25</td><td style="padding:10px 10px;text-align:right;"><b>87.5</b></td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div style="margin:44px 0 0;">
+  <div style="font-size:13px;font-weight:700;color:#017E84;letter-spacing:1px;text-transform:uppercase;">Feature 4</div>
+  <h3 style="font-size:23px;font-weight:700;margin:4px 0 8px;">Show only the column you need</h3>
+  <p style="font-size:15px;line-height:1.6;color:#555;margin:0 0 14px;">Set <b>Stock Metric</b> to <b>Quantity On Hand</b> and the <b>Forecasted</b> column disappears from every order, or the other way round. Each column is also <b>optional</b>, so a user can hide it from the column picker without touching the settings. Untick <b>Stock on PO Lines</b> and both columns are gone.</p>
+  <img src="pls_05_on_hand_only.png" alt="Purchase order showing only the On Hand column" style="width:100%;border:1px solid #e1e1e6;border-radius:10px;box-shadow:0 6px 24px rgba(30,30,60,.10);"/>
+</div>
+
+<div style="margin:44px 0 0;">
+  <div style="font-size:13px;font-weight:700;color:#017E84;letter-spacing:1px;text-transform:uppercase;">Feature 5</div>
+  <h3 style="font-size:23px;font-weight:700;margin:4px 0 8px;">Full Arabic translation, right-to-left layout</h3>
+  <p style="font-size:15px;line-height:1.6;color:#555;margin:0 0 14px;">Every label, option and help text ships in <b>Arabic (ar_001)</b>. With an Arabic user the purchase order mirrors right to left and the stock columns keep their red and amber flags.</p>
+  <img src="pls_06_arabic_rtl.png" alt="Purchase order in Arabic with right-to-left layout and stock columns" style="width:100%;border:1px solid #e1e1e6;border-radius:10px;box-shadow:0 6px 24px rgba(30,30,60,.10);margin-bottom:22px;"/>
+  <img src="pls_07_settings_arabic.png" alt="Purchase settings in Arabic with the stock options" style="width:100%;border:1px solid #e1e1e6;border-radius:10px;box-shadow:0 6px 24px rgba(30,30,60,.10);"/>
+</div>
+
+<!-- ============================== READING THE COLUMNS ============================== -->
+<h2 style="font-size:28px;font-weight:700;margin:48px 0 6px;color:#2b2b33;">Reading the columns</h2>
+<p style="font-size:16px;color:#555;margin:0 0 18px;">Colour tells you where to look first.</p>
+<div style="font-size:15px;line-height:1.6;">
+  <div style="margin-bottom:6px;"><span style="display:inline-block;min-width:150px;text-align:center;background:#fee2e2;color:#b91c1c;border-radius:10px;padding:1px 8px;font-size:13px;margin-right:10px;">Red</span> On Hand or Forecasted below zero: more is promised than you have.</div>
+  <div style="margin-bottom:6px;"><span style="display:inline-block;min-width:150px;text-align:center;background:#fef3c7;color:#b45309;border-radius:10px;padding:1px 8px;font-size:13px;margin-right:10px;">Amber</span> Forecasted is zero or more, but below the quantity on this line.</div>
+  <div style="margin-bottom:6px;"><span style="display:inline-block;min-width:150px;text-align:center;background:#f3f4f6;color:#6b7280;border-radius:10px;padding:1px 8px;font-size:13px;margin-right:10px;">Grey</span> Nothing on hand in the scope.</div>
+  <div style="margin-bottom:6px;"><span style="display:inline-block;min-width:150px;text-align:center;background:#ffffff;color:#555;border:1px solid #e8e8ee;border-radius:10px;padding:0 8px;font-size:13px;margin-right:10px;">Blank</span> Service or consumable product: no stock is tracked.</div>
+</div>
+<div style="background:#f4fbfb;border-left:4px solid #017E84;border-radius:8px;padding:16px 20px;font-size:15px;line-height:1.6;margin-top:14px;"><b>Rule:</b> Forecasted = On Hand + incoming &minus; outgoing, in the selected scope, converted to the line&rsquo;s unit. <b>Example:</b> Copper Cable in Jeddah has 6 on hand and an open delivery of 10, so Forecasted = 6 &minus; 10 = <b>&minus;4</b>. Once you confirm a PO, its own receipt counts as incoming: confirming 20 cables lifts the Jeddah forecast to <b>16</b>.</div>
+
+<!-- ============================== CORNER CASES ============================== -->
+<h2 style="font-size:28px;font-weight:700;margin:48px 0 6px;color:#2b2b33;">Built for real-world corner cases</h2>
+<p style="font-size:16px;color:#555;margin:0 0 18px;">What happens in the situations that usually break stock figures.</p>
+<div style="display:flex;flex-wrap:wrap;margin:0 -8px;font-size:15px;line-height:1.55;">
+  <div style="flex:1 1 320px;margin:8px;padding:16px 18px;border:1px solid #e8e8ee;border-radius:12px;"><b>No receiving warehouse</b><br/><span style="color:#555;">Dropship or other operation types without a warehouse fall back to all company warehouses instead of showing zero.</span></div>
+  <div style="flex:1 1 320px;margin:8px;padding:16px 18px;border:1px solid #e8e8ee;border-radius:12px;"><b>Buying in another unit</b><br/><span style="color:#555;">Stock is converted to the line&rsquo;s unit of measure: 600 Units read as 50 Dozens.</span></div>
+  <div style="flex:1 1 320px;margin:8px;padding:16px 18px;border:1px solid #e8e8ee;border-radius:12px;"><b>Multi-company</b><br/><span style="color:#555;">Each company has its own settings, and company-wide scope never adds another company&rsquo;s warehouses, even with several companies selected.</span></div>
+  <div style="flex:1 1 320px;margin:8px;padding:16px 18px;border:1px solid #e8e8ee;border-radius:12px;"><b>Large orders</b><br/><span style="color:#555;">Lines are grouped by warehouse and read in one batch: 3 lines and 40 lines take the same 13 database queries.</span></div>
+  <div style="flex:1 1 320px;margin:8px;padding:16px 18px;border:1px solid #e8e8ee;border-radius:12px;"><b>Lists across warehouses</b><br/><span style="color:#555;">Lines from orders for different warehouses, read together, each get their own warehouse&rsquo;s figures.</span></div>
+  <div style="flex:1 1 320px;margin:8px;padding:16px 18px;border:1px solid #e8e8ee;border-radius:12px;"><b>Services and consumables</b><br/><span style="color:#555;">Non-storable products show a blank cell instead of a misleading zero.</span></div>
+  <div style="flex:1 1 320px;margin:8px;padding:16px 18px;border:1px solid #e8e8ee;border-radius:12px;"><b>Unsaved changes</b><br/><span style="color:#555;">Figures follow the form while you edit: new lines, a new product, a new unit or a new Deliver To.</span></div>
+  <div style="flex:1 1 320px;margin:8px;padding:16px 18px;border:1px solid #e8e8ee;border-radius:12px;"><b>Buyers without Inventory rights</b><br/><span style="color:#555;">A Purchase user with no Inventory access still sees the figures, with no access error.</span></div>
+  <div style="flex:1 1 320px;margin:8px;padding:16px 18px;border:1px solid #e8e8ee;border-radius:12px;"><b>Nothing stored</b><br/><span style="color:#555;">The columns are computed on read, so they are never stale and add nothing to your database.</span></div>
+</div>
+
+<!-- ============================== SECURITY ============================== -->
+<h2 style="font-size:28px;font-weight:700;margin:48px 0 6px;color:#2b2b33;">Security</h2>
+<p style="font-size:16px;color:#555;margin:0 0 18px;">No new groups or record rules; standard Purchase access applies.</p>
+<table style="width:100%;border-collapse:collapse;font-size:15px;">
+  <thead><tr style="background:#714B67;color:#fff;"><th style="text-align:left;padding:10px 14px;">Who</th><th style="text-align:left;padding:10px 14px;">Sees / can do</th></tr></thead>
+  <tbody>
+    <tr style="border-bottom:1px solid #eee;"><td style="padding:10px 14px;">Purchase / User</td><td style="padding:10px 14px;">The <b>On Hand</b> and <b>Forecasted</b> columns on the orders they can open, with or without Inventory rights.</td></tr>
+    <tr style="border-bottom:1px solid #eee;background:#fafafa;"><td style="padding:10px 14px;">Purchase / Administrator</td><td style="padding:10px 14px;">Changes <b>Stock on PO Lines</b>, <b>Stock Metric</b> and <b>Inventory Scope</b> in Purchase settings.</td></tr>
+    <tr style="border-bottom:1px solid #eee;"><td style="padding:10px 14px;">Multi-company</td><td style="padding:10px 14px;">Settings are per company; figures only come from the warehouses of the order&rsquo;s company.</td></tr>
+  </tbody>
+</table>
+
+<!-- ============================== TECHNICAL DETAILS ============================== -->
+<h2 style="font-size:28px;font-weight:700;margin:48px 0 6px;color:#2b2b33;">Technical details</h2>
+<table style="width:100%;border-collapse:collapse;font-size:15px;margin-top:12px;">
+  <tbody>
+    <tr style="border-bottom:1px solid #eee;"><td style="padding:10px 14px;width:240px;color:#777;">Odoo version</td><td style="padding:10px 14px;">16.0, Community and Enterprise</td></tr>
+    <tr style="border-bottom:1px solid #eee;background:#fafafa;"><td style="padding:10px 14px;width:240px;color:#777;">Depends on</td><td style="padding:10px 14px;"><code>purchase_stock</code></td></tr>
+    <tr style="border-bottom:1px solid #eee;"><td style="padding:10px 14px;width:240px;color:#777;">Python dependency</td><td style="padding:10px 14px;">None</td></tr>
+    <tr style="border-bottom:1px solid #eee;background:#fafafa;"><td style="padding:10px 14px;width:240px;color:#777;">Settings</td><td style="padding:10px 14px;">Purchase &rsaquo; Configuration &rsaquo; Settings &rsaquo; Orders &rsaquo; Stock on PO Lines</td></tr>
+    <tr style="border-bottom:1px solid #eee;"><td style="padding:10px 14px;width:240px;color:#777;">Views</td><td style="padding:10px 14px;">Purchase order form: line list and line form</td></tr>
+    <tr style="border-bottom:1px solid #eee;background:#fafafa;"><td style="padding:10px 14px;width:240px;color:#777;">Models</td><td style="padding:10px 14px;"><code>res.company</code>, <code>res.config.settings</code>, <code>purchase.order</code>, <code>purchase.order.line</code> (computed, non-stored fields)</td></tr>
+    <tr style="border-bottom:1px solid #eee;"><td style="padding:10px 14px;width:240px;color:#777;">Performance</td><td style="padding:10px 14px;">One batched stock lookup per company and warehouse scope; query count does not grow with the number of lines</td></tr>
+    <tr style="border-bottom:1px solid #eee;background:#fafafa;"><td style="padding:10px 14px;width:240px;color:#777;">Automated tests</td><td style="padding:10px 14px;">15: warehouse vs company scope, forecast with deliveries and receipts, UoM conversion, services, metric flags, dropship fallback, multi-company, mixed batches, live form updates, settings, Purchase-only user, query counts</td></tr>
+    <tr style="border-bottom:1px solid #eee;"><td style="padding:10px 14px;width:240px;color:#777;">Translations</td><td style="padding:10px 14px;">Arabic (<code>ar_001</code>), right-to-left ready</td></tr>
+    <tr style="border-bottom:1px solid #eee;background:#fafafa;"><td style="padding:10px 14px;width:240px;color:#777;">License</td><td style="padding:10px 14px;">LGPL-3</td></tr>
+  </tbody>
+</table>
+
+<!-- ============================== CONTACT ============================== -->
+<div style="margin:52px 0 40px;background:linear-gradient(120deg,#714B67 0%,#017E84 100%);border-radius:18px;padding:36px 40px;color:#fff;">
+  <h2 style="font-size:26px;font-weight:700;margin:0 0 8px;color:#fff;">Support &amp; customization</h2>
+  <p style="font-size:16px;line-height:1.6;margin:0 0 20px;color:#fff;opacity:.95;">Questions, a demo, or an adaptation to your own process? Get in touch.</p>
+  <a href="mailto:ibrahim.yahiah@gmail.com" style="display:inline-block;background:#fff;color:#714B67;font-weight:700;text-decoration:none;border-radius:8px;padding:12px 22px;margin:0 12px 10px 0;">&#9993;  ibrahim.yahiah@gmail.com</a>
+  <a href="https://www.linkedin.com/in/ibrahim-yahia" target="_blank" rel="noopener" style="display:inline-block;border:2px solid #fff;color:#fff;font-weight:700;text-decoration:none;border-radius:8px;padding:10px 22px;margin:0 0 10px 0;">LinkedIn: Ibrahim Yahia</a>
+  <p style="font-size:13px;margin:14px 0 0;opacity:.8;color:#fff;">Author: Ibrahim Yahia &middot; License: LGPL-3</p>
+</div>
+
+</section>

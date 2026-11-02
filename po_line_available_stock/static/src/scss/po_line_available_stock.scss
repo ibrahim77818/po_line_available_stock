@@ -1,0 +1,9 @@
+// Stock columns on PO lines.
+// Logical properties only (inline-start/end) so the same rules hold in
+// LTR and in RTL (Arabic), where Odoo flips the backend bundle.
+.o_list_renderer .o_pls_stock {
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    text-align: end;
+    padding-inline-start: 0.75rem;
+}
