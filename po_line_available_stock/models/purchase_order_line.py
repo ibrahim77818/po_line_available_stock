@@ -75,7 +75,9 @@ class PurchaseOrderLine(models.Model):
             line.pls_qty_on_hand = 0.0
             line.pls_qty_forecasted = 0.0
             product = line.product_id
-            line.pls_is_storable = bool(product) and product.type == "product"
+            # v18: the "Storable Product" type is gone; storable goods are
+            # type "consu" with is_storable ("Track Inventory") ticked.
+            line.pls_is_storable = bool(product) and product.is_storable
             company = line.order_id.company_id or line.company_id or self.env.company
             if not company.po_stock_visibility or not line.pls_is_storable:
                 continue
@@ -88,7 +90,8 @@ class PurchaseOrderLine(models.Model):
             products = lines.product_id._origin
             stock = (
                 products.with_company(company_id)
-                .with_context(warehouse=list(wh_ids), location=False)
+                # v18 reads ``warehouse_id`` (``warehouse`` is silently ignored)
+                .with_context(warehouse_id=list(wh_ids), location=False)
                 ._compute_quantities_dict(None, None, None)
             )
             for line in lines:

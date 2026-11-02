@@ -43,7 +43,7 @@ class TestPoLineAvailableStock(TransactionCase):
     @classmethod
     def _make_product(cls, name):
         return cls.env["product.product"].create({
-            "name": name, "type": "product",
+            "name": name, "type": "consu", "is_storable": True,
             "uom_id": cls.uom_unit.id, "uom_po_id": cls.uom_unit.id,
         })
 
@@ -167,6 +167,9 @@ class TestPoLineAvailableStock(TransactionCase):
             "name": "PLS Dropship", "code": "incoming",
             "sequence_code": "PLSDS", "warehouse_id": False,
             "company_id": self.company.id,
+            # v18: both default locations are required; without a warehouse
+            # they can't be computed, so set them as a real dropship type does
+            "default_location_src_id": self.env.ref("stock.stock_location_suppliers").id,
             "default_location_dest_id": self.customer_loc.id,
         })
         po = self._make_po(self.wh1, [(self.product, 1, None)],
